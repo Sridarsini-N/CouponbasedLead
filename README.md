@@ -49,7 +49,7 @@ npm run dev
 Set values in `.env` as needed:
 
 - `PORT=5000`
-- `MONGO_URI=mongodb://127.0.0.1:27017/coupon_lead_db`
+- `MONGO_URI=mongodb://127.0.0.1:27017/coupon_lead`
 - `CLIENT_ORIGIN=http://localhost:5173`
 - `SUBMISSION_COOLDOWN_MINUTES=10`
 
