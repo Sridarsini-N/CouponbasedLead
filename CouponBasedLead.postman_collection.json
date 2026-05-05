@@ -1,0 +1,140 @@
+{
+  "info": {
+    "name": "Coupon Based Lead APIs",
+    "_postman_id": "9f5b1116-6f5d-43f4-a1e5-418df7f9522e",
+    "description": "Postman collection for health, coupon management, coupon validation, and lead submission APIs.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Coupons",
+      "item": [
+        {
+          "name": "Get Coupons",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/coupons"
+          }
+        },
+        {
+          "name": "Create Coupon - Percentage",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"TNFEST25\",\n  \"discountType\": \"PERCENTAGE\",\n  \"discountValue\": 25,\n  \"minOrderValue\": 1000,\n  \"applicableRequirementTypes\": [\"Service\", \"Consultation\"],\n  \"maxUsage\": 150,\n  \"isFirstTimeOnly\": false,\n  \"expiresAt\": \"2026-12-31T23:59:59.000Z\"\n}"
+            },
+            "url": "{{baseUrl}}/coupons"
+          }
+        },
+        {
+          "name": "Create Coupon - Flat",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"code\": \"FLAT250\",\n  \"discountType\": \"FLAT\",\n  \"discountValue\": 250,\n  \"minOrderValue\": 1200,\n  \"applicableRequirementTypes\": [\"Product\"],\n  \"maxUsage\": 100,\n  \"isFirstTimeOnly\": false,\n  \"expiresAt\": \"2026-12-31T23:59:59.000Z\"\n}"
+            },
+            "url": "{{baseUrl}}/coupons"
+          }
+        },
+        {
+          "name": "Validate Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"couponCode\": \"SAVE10\",\n  \"requirementType\": \"Service\",\n  \"basePrice\": 2500,\n  \"email\": \"john@example.com\",\n  \"phoneNumber\": \"9876543210\"\n}"
+            },
+            "url": "{{baseUrl}}/coupons/validate"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Leads",
+      "item": [
+        {
+          "name": "Submit Lead - With Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"phoneNumber\": \"9876543210\",\n  \"email\": \"john@example.com\",\n  \"city\": \"Chennai\",\n  \"requirementType\": \"Service\",\n  \"budgetRange\": \"1000 - 5000\",\n  \"basePrice\": 2500,\n  \"message\": \"Need quick service\",\n  \"couponCode\": \"SAVE10\"\n}"
+            },
+            "url": "{{baseUrl}}/leads"
+          }
+        },
+        {
+          "name": "Submit Lead - Without Coupon",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Priya K\",\n  \"phoneNumber\": \"9876543211\",\n  \"email\": \"priya@example.com\",\n  \"city\": \"Coimbatore\",\n  \"requirementType\": \"Product\",\n  \"budgetRange\": \"500 - 1000\",\n  \"basePrice\": 800,\n  \"message\": \"Need product details\",\n  \"couponCode\": \"\"\n}"
+            },
+            "url": "{{baseUrl}}/leads"
+          }
+        },
+        {
+          "name": "Get Leads",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/leads"
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:5000/api"
+    }
+  ]
+}
